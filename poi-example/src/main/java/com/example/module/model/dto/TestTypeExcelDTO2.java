@@ -12,8 +12,8 @@ import java.util.Date;
  * 基本配置
  */
 @Data
-@ExcelGroupEntity(notStandard = false,templateName = "test-type.xlsx",startRow = 1,uri = "/auto-api/testType")
-public class TestTypeExcelDTO {
+@ExcelGroupEntity(notStandard = false,templateName = "test-type.xlsx",startRow = 1,uri = "/auto-api/testType2")
+public class TestTypeExcelDTO2 {
     @ExcelColumn
     private String text;
 

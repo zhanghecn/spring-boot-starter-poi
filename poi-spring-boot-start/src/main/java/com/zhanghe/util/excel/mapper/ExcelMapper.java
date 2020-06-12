@@ -93,8 +93,7 @@ public class ExcelMapper implements ExcelOperationMapper,Closeable{
     public void writer(ExcelEntity excelXmlEntity, List<?> list, OutputStream outputStream){
         //封装成 sxssfWorkbook
         warp();
-        ExcelObjectMapperSuper excelObjectMapperSuper = new ExcelObjectMapperSuper(excelXmlEntity);
-        excelObjectMapperSuper.getExcel(workbook,list);
+        getExcelByList(excelXmlEntity,list);
         writer(outputStream);
     }
 
@@ -137,14 +136,18 @@ public class ExcelMapper implements ExcelOperationMapper,Closeable{
         Map<Integer, List> sheets = excelGroupSheets.getSheets();
         for (ExcelEntity entity : excelEntity) {
             List list = sheets.get(entity.getSheetIndex());
-            if(list!=null) {
-                //获取全部sheet
-                ExcelObjectMapperSuper excelObjectMapperSuper = new ExcelObjectMapperSuper(entity);
-                excelObjectMapperSuper.getExcel(workbook, list);
-            }
+            getExcelByList(entity, list);
         }
         //输出
         writer(outputStream);
+    }
+
+    private void getExcelByList(ExcelEntity entity, List list) {
+        if(list!=null) {
+            //获取全部sheet
+            ExcelObjectMapperSuper excelObjectMapperSuper = new ExcelObjectMapperSuper(entity);
+            excelObjectMapperSuper.getExcel(workbook, list);
+        }
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
@@ -85,11 +86,12 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
         }else{
             if(ClassUtils.isAssignable(List.class,parameterType)){
                 List<?> list = (List<?>) returnValue;
-                ExcelEntity load = excelMapperUtil.load(mergedAnnotation.configBeanName());
-                if(load!=null){
-                    ExcelMapper excelMapper = ExcelMapper.getExcelMapper(load);
+                List<ExcelEntity> excelEntities = getExcelEntities(mergedAnnotation, excelMapperUtil);
+                if(!ObjectUtils.isEmpty(excelEntities)){
+                    ExcelEntity excelEntity = excelEntities.get(0);
+                    ExcelMapper excelMapper = ExcelMapper.getExcelMapper(excelEntity);
                     setContentType(mergedAnnotation.exportFileName(), response);
-                    excelMapper.writer(load,list,outputStream);
+                    excelMapper.writer(excelEntity,list,outputStream);
                 }
             }else{
                 writeExcelGroupSheets((ExcelGroupSheets) returnValue,mergedAnnotation,excelMapperUtil,outputStream);
@@ -101,6 +103,15 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
 
     protected void writeExcelGroupSheets(ExcelGroupSheets excelGroupSheets, ExcelExport mergedAnnotation, ExcelMapperUtil excelMapperUtil, OutputStream outputStream) throws IOException {
 
+        List<ExcelEntity> loadGroups = getExcelEntities(mergedAnnotation, excelMapperUtil);
+
+        ExcelMapper excelMapper = ExcelMapper.getExcelMapper(loadGroups);
+        if(excelMapper!=null){
+            excelMapper.writer(loadGroups,excelGroupSheets,outputStream);
+        }
+    }
+
+    private List<ExcelEntity> getExcelEntities(ExcelExport mergedAnnotation, ExcelMapperUtil excelMapperUtil) {
         List<ExcelEntity> loadGroups;
 
         if(StringUtils.isEmpty(mergedAnnotation.configBeanName())){
@@ -108,11 +119,9 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
         }else{
             loadGroups = excelMapperUtil.loadGroups(mergedAnnotation.configBeanName());
         }
-        ExcelMapper excelMapper = ExcelMapper.getExcelMapper(loadGroups);
-        if(excelMapper!=null){
-            excelMapper.writer(loadGroups,excelGroupSheets,outputStream);
-        }
+        return loadGroups;
     }
+
     public static void setContentType(String exportFileName, HttpServletResponse response) throws UnsupportedEncodingException {
         response.setContentType("application/octet-stream");
         exportFileName = response.encodeURL(new String(exportFileName.getBytes(),"iso8859-1"));			//保存的文件名,必须和页面编码一致,否则乱码

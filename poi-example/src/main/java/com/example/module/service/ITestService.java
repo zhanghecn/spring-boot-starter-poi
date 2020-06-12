@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ITestService<T> {
 
-    void save(List batch, Class<T>  c);
+    void save(List<T> batch);
 
-    void save(SheetHandlerList<T> sheetHandlerList,Class<T> c);
+    void save(SheetHandlerList<T> sheetHandlerList);
 }

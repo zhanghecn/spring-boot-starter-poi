@@ -2,25 +2,29 @@ package com.zhanghe.autoconfig.config;
 
 
 import com.zhanghe.autoconfig.annotation.ExcelExportMethodReturnHandler;
+import com.zhanghe.autoconfig.annotation.RequestParamExcelMethodArgumentResolver;
 import com.zhanghe.util.ExcelMapperUtil;
 import com.zhanghe.util.SpringContextHelper;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 主要还是配置导出的处理
  */
 @Configuration
-@ConditionalOnBean(RequestMappingHandlerAdapter.class)
-@Order(Integer.MAX_VALUE)
-public class SpringMvcConfig  implements InitializingBean {
+@AutoConfigureAfter({ ExcelHelperPropertyAutoConfiguration.class })
+@ConditionalOnMissingBean(SpringMvcExcelParamConfig.class)
+public class SpringMvcExcelParamConfig implements InitializingBean {
    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
     /**
@@ -41,11 +45,8 @@ public class SpringMvcConfig  implements InitializingBean {
         };
     }
 
-    /**
-     * 获取请求映射处理适配器
-     * @param requestMappingHandlerAdapter
-     */
-    public SpringMvcConfig(RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
+
+    public SpringMvcExcelParamConfig(RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
         this.requestMappingHandlerAdapter = requestMappingHandlerAdapter;
     }
 
@@ -60,5 +61,18 @@ public class SpringMvcConfig  implements InitializingBean {
         list.add(excelExportMethodReturnHandler);
         list.addAll(this.requestMappingHandlerAdapter.getReturnValueHandlers());
         this.requestMappingHandlerAdapter.setReturnValueHandlers(list);
+    }
+
+    /**
+     * 按照顺序把导出放在第一个处理
+     * @throws Exception
+     */
+    @Configuration
+    public static class SpringMVCArgumentAutoConfig implements  WebMvcConfigurer{
+
+        @Override
+        public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+            resolvers.add(new RequestParamExcelMethodArgumentResolver());
+        }
     }
 }

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.zhanghe.autoconfig.config.ExcelHelperPropertyAutoConfiguration,\
+com.zhanghe.autoconfig.config.SpringMvcExcelParamConfig

@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 
 public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArgumentResolver {
-   private ExcelParamHandlerProvider instance = ExcelParamHandlerProvider.getInstance();
 
 
     @Override
@@ -35,7 +34,7 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
                                   ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception {
-
+        ExcelParamHandlerProvider instance = ExcelParamHandlerProvider.getInstance();
 
         ExcelParam requestParam = parameter.getParameterAnnotation(ExcelParam.class);
 
@@ -67,7 +66,7 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
 
         List<MultipartFile> files;
 
-        if(StringUtils.isEmpty(paramName)){
+        if(!StringUtils.isEmpty(paramName)){
             files = multipartRequest.getFiles(paramName);
         }else{
             files = multipartRequest.getFileMap().values().parallelStream().collect(Collectors.toList());

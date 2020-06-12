@@ -1,7 +1,10 @@
 package com.zhanghe.util;
 
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ObjectUtils;
 
@@ -10,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SpringContextHelper {
+public class SpringContextHelper implements ApplicationContextAware, ResourceLoaderAware {
     public static ApplicationContext applicationContext;
 
     public static ResourceLoader resourceLoader;
@@ -25,5 +28,13 @@ public class SpringContextHelper {
     }
 
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringContextHelper.applicationContext = applicationContext;
+    }
 
+    @Override
+    public void setResourceLoader(ResourceLoader resourceLoader) {
+        SpringContextHelper.resourceLoader = resourceLoader;
+    }
 }
