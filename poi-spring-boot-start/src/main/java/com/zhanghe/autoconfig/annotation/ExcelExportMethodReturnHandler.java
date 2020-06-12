@@ -12,6 +12,7 @@ import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
@@ -99,13 +100,14 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
     }
 
     protected void writeExcelGroupSheets(ExcelGroupSheets excelGroupSheets, ExcelExport mergedAnnotation, ExcelMapperUtil excelMapperUtil, OutputStream outputStream) throws IOException {
-        String groupId;
-        if(mergedAnnotation.exportClass()!=Class.class){
-            groupId = mergedAnnotation.exportClass().getName();
+
+        List<ExcelEntity> loadGroups;
+
+        if(StringUtils.isEmpty(mergedAnnotation.configBeanName())){
+            loadGroups = excelMapperUtil.loadGroups(mergedAnnotation.exportClass());
         }else{
-            groupId = mergedAnnotation.configBeanName();
+            loadGroups = excelMapperUtil.loadGroups(mergedAnnotation.configBeanName());
         }
-        List<ExcelEntity> loadGroups = excelMapperUtil.loadGroups(groupId);
         ExcelMapper excelMapper = ExcelMapper.getExcelMapper(loadGroups);
         if(excelMapper!=null){
             excelMapper.writer(loadGroups,excelGroupSheets,outputStream);
