@@ -11,8 +11,8 @@ Spring Boot 集成 POI
 
 ##### 导出
 支持图片导出
-支持多sheet组合成 一个excel导出
-支持多excel 导出成zip
+支持多sheet组合成一个excel导出
+支持多excel导出成zip
 
 ##### 导入
 支持多excel导入
