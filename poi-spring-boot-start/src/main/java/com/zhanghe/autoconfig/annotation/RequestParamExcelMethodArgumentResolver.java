@@ -1,6 +1,8 @@
 package com.zhanghe.autoconfig.annotation;
 
 import com.zhanghe.autoconfig.entity.ExcelEntity;
+import com.zhanghe.autoconfig.web.handler.params.ExcelMethodParamsHandler;
+import com.zhanghe.autoconfig.web.handler.params.ExcelParamHandlerProvider;
 import com.zhanghe.util.ExcelMapperUtil;
 import com.zhanghe.util.SpringContextHelper;
 import com.zhanghe.util.excel.mapper.ExcelMappersEntity;
@@ -15,15 +17,16 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.support.MultipartResolutionDelegate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArgumentResolver {
+   private ExcelParamHandlerProvider instance = ExcelParamHandlerProvider.getInstance();
 
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         ExcelParam requestParam = parameter.getParameterAnnotation(ExcelParam.class);
-
         return requestParam!=null;
     }
 
@@ -32,6 +35,8 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
                                   ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception {
+
+
         ExcelParam requestParam = parameter.getParameterAnnotation(ExcelParam.class);
 
         //获取配置名
@@ -39,8 +44,6 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
 
         String paramName = requestParam.name();
 
-        //获取配置类
-        Class<?> aClass = requestParam.configClass();
 
         ExcelMapperUtil excelMapperUtil = ExcelMapperUtil.getExcelMapperUtil(SpringContextHelper.applicationContext);
 
@@ -49,6 +52,11 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
 
         //按照配置名称或者配置类读取配置
         if(StringUtils.isEmpty(configName)){
+            //获取配置类
+            ExcelMethodParamsHandler excelMethodParamsHandler = instance.getExcelMethodParameterConverter(parameter).orElseThrow(() -> new IllegalArgumentException("@ExcelParam 未知的注入类型,必须给配置名称 [configName]"));
+            //获取配置类型
+            Class<?> aClass = excelMethodParamsHandler.getRawClass(parameter);
+            //获取配置
             excelEntities  = excelMapperUtil.loadGroups(aClass);
         }else{
             excelEntities  = excelMapperUtil.loadGroups(configName);
@@ -57,12 +65,17 @@ public class RequestParamExcelMethodArgumentResolver implements HandlerMethodArg
         //解析成multipart 的请求
         MultipartRequest multipartRequest = MultipartResolutionDelegate.resolveMultipartRequest(webRequest);
 
-        //获取文件
-        List<MultipartFile> files = multipartRequest.getFiles(paramName);
+        List<MultipartFile> files;
 
+        if(StringUtils.isEmpty(paramName)){
+            files = multipartRequest.getFiles(paramName);
+        }else{
+            files = multipartRequest.getFileMap().values().parallelStream().collect(Collectors.toList());
+        }
+
+        //获取文件
         ExcelMappersEntity excelMappersEntity = ExcelMappersEntity.multipartFileMappersEntity(excelEntities, files);
 
-
-        return null;
+        return instance.convert(parameter,excelMappersEntity);
     }
 }

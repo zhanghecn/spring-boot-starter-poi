@@ -6,7 +6,12 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ Created by ZhangHe
+ ExcelParamHandlerProvider 提供参数处理解析集合
+ */
 public class ExcelParamHandlerProvider implements  ExcelMethodParamsHandler{
     private static ExcelParamHandlerProvider excelParamHandlerProvider;
 
@@ -47,7 +52,14 @@ public class ExcelParamHandlerProvider implements  ExcelMethodParamsHandler{
 
     @Override
     public Object convert(MethodParameter methodParameter, Object value) {
-        return getExcelMethodParameterConverter(methodParameter,value).convert(methodParameter,value);
+        return Optional.ofNullable(getExcelMethodParameterConverter(methodParameter,value))
+                .orElseGet(NullMethodParamHandler::new)
+                .convert(methodParameter,value);
+    }
+
+    @Override
+    public boolean isAssignable(MethodParameter methodParameter) {
+        return false;
     }
 
     public ExcelMethodParamsHandler getExcelMethodParameterConverter(MethodParameter methodParameter, Object val){
@@ -61,6 +73,11 @@ public class ExcelParamHandlerProvider implements  ExcelMethodParamsHandler{
             }
         }
         return null;
+    }
+
+    public Optional<ExcelMethodParamsHandler> getExcelMethodParameterConverter(MethodParameter methodParameter){
+        Optional<ExcelMethodParamsHandler> first = this.excelMethodParamsHandlers.stream().filter((x) -> x.isAssignable(methodParameter)).findFirst();
+        return first;
     }
 
     public static synchronized ExcelParamHandlerProvider getInstance(){

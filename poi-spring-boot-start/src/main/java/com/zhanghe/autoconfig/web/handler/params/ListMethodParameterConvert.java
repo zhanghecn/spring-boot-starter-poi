@@ -12,10 +12,9 @@ import java.util.List;
 public class ListMethodParameterConvert implements ExcelMethodParamsHandler {
     @Override
     public boolean canConvert(MethodParameter methodParameter, Object value) {
-        Class<?> parameterType = methodParameter.getParameterType();
-            if(isExcelMappersEntity(value)  && ClassUtils.isAssignable(List.class,parameterType)){
-                return true;
-            }
+        if(isExcelMappersEntity(value)  && isAssignable(methodParameter)){
+            return true;
+        }
         return false;
     }
 
@@ -29,5 +28,15 @@ public class ListMethodParameterConvert implements ExcelMethodParamsHandler {
             list.addAll(objs);
         }
         return list;
+    }
+
+    @Override
+    public Class<?> getRawClass(MethodParameter methodParameter) {
+        return getRawClassByList(methodParameter);
+    }
+
+    @Override
+    public boolean isAssignable(MethodParameter methodParameter) {
+        return ClassUtils.isAssignable(List.class,methodParameter.getParameterType());
     }
 }

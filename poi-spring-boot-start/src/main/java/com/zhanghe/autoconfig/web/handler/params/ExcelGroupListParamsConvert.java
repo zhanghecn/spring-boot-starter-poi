@@ -8,6 +8,7 @@ import com.zhanghe.util.excel.mapper.ExcelMapper;
 import com.zhanghe.util.excel.mapper.ExcelMappersEntity;
 import com.zhanghe.util.excel.mapper.FileExcelMapperInfo;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +21,7 @@ import java.util.List;
 public class ExcelGroupListParamsConvert implements ExcelMethodParamsHandler  {
     @Override
     public boolean canConvert(MethodParameter methodParameter, Object value) {
-        Class<?> parameterType = methodParameter.getParameterType();
-        if(isExcelMappersEntity(value)  && ClassUtils.isAssignable(ExcelGroupList.class,parameterType)){
+        if(isExcelMappersEntity(value)  && isAssignable(methodParameter)){
             return true;
         }
         return false;
@@ -50,5 +50,10 @@ public class ExcelGroupListParamsConvert implements ExcelMethodParamsHandler  {
             }
         }
         return excelGroupList;
+    }
+
+    @Override
+    public boolean isAssignable(MethodParameter methodParameter) {
+        return ClassUtils.isAssignable(ExcelGroupList.class,ResolvableType.forMethodParameter(methodParameter).getRawClass());
     }
 }

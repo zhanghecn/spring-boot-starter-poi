@@ -44,4 +44,14 @@ public class ExcelObjectListParameterConvert implements ExcelMethodParamsHandler
         }
         return excelObjectList;
     }
+
+    @Override
+    public Class<?> getRawClass(MethodParameter methodParameter) {
+        return getRawClassByList(methodParameter);
+    }
+
+    @Override
+    public boolean isAssignable(MethodParameter methodParameter) {
+        return  ClassUtils.isAssignable(ExcelObjectList.class,methodParameter.getParameterType());
+    }
 }

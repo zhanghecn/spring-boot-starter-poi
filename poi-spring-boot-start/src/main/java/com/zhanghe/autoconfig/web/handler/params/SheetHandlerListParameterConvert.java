@@ -17,8 +17,7 @@ public class SheetHandlerListParameterConvert implements ExcelMethodParamsHandle
 
     @Override
     public boolean canConvert(MethodParameter methodParameter, Object value) {
-        Class<?> parameterType = methodParameter.getParameterType();
-        if(isExcelMappersEntity(value)  && ClassUtils.isAssignable(SheetHandlerList.class,parameterType)){
+        if(isExcelMappersEntity(value)  && isAssignable(methodParameter)){
             return true;
         }
         return false;
@@ -46,5 +45,15 @@ public class SheetHandlerListParameterConvert implements ExcelMethodParamsHandle
             }
         }
         return sheetHandlerWraps;
+    }
+
+    @Override
+    public Class<?> getRawClass(MethodParameter methodParameter) {
+        return getRawClassByList(methodParameter);
+    }
+
+    @Override
+    public boolean isAssignable(MethodParameter methodParameter) {
+        return ClassUtils.isAssignable(SheetHandlerList.class,methodParameter.getParameterType());
     }
 }

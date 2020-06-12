@@ -20,11 +20,7 @@ public @interface ExcelParam {
     @AliasFor("value")
     String configName() default "";
 
-    /**
-     * 配置类
-     * @return
-     */
-    Class<?> configClass() default Class.class;
+
 
     /**
      *  上传的文件的表单参数名称key

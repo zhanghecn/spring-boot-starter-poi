@@ -15,9 +15,10 @@ import java.util.List;
  * 路径如下： /excel/import/{configName}
  * 并且提交表单的excel文件参数名称必须叫：excelFile
  */
+//TODO: 该自动API 是为了提供前端共用组件封装  请查看vue项目
 @RestController
-@RequestMapping("test")
-public class ExcelDataController {
+@RequestMapping("auto-api")
+public class AutoApiController {
 
     /**
      * 访问 /excel/import/testTypeExcelDTO 来进行映射到这个接口
