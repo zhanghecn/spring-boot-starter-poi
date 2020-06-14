@@ -49,7 +49,7 @@ public class ExcelGroupEntityAutoConfiguration  {
         @Override
         public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
             try {
-                registerApiConfiguration(registry);
+//                registerApiConfiguration(registry);
 
                 Map<String, Object> annotationAttributes = importingClassMetadata.getAnnotationAttributes(ExcelConfigurationScanner.class.getCanonicalName());
 

@@ -3,7 +3,7 @@ package com.zhanghe.util;
 
 import com.zhanghe.autoconfig.entity.ExcelEntity;
 import com.zhanghe.autoconfig.entity.SheetHandlerWrap;
-import com.zhanghe.exception.RRException;
+import com.zhanghe.exception.ExcelException;
 import com.zhanghe.util.excel.mapper.ExcelMapper;
 import com.zhanghe.util.excel.mapper.ExcelObjectMapper;
 import com.zhanghe.util.excel.mapper.ExcelObjectMapperSuper;
@@ -60,12 +60,12 @@ public interface ExcelMapperUtil {
     //检查模板
     default void checkTemplate(ExcelMapper[] excelMapper, ExcelEntity load) throws IOException {
            if (!isTemplate(excelMapper,load)) {
-               throw new RRException("模板不一致。");
+               throw new ExcelException("模板不一致。");
            }
     }
     default void checkFile(String fileName) {
         if(!isExcelFile(fileName)){
-            throw new RRException("文件格式不是xlsx,xls或者zip格式");
+            throw new ExcelException("文件格式不是xlsx,xls或者zip格式");
         }
     }
     static boolean isExcelFile(String fileName) {

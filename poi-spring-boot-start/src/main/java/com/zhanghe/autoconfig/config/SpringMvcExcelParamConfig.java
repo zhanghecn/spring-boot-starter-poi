@@ -1,6 +1,7 @@
 package com.zhanghe.autoconfig.config;
 
 
+import com.zhanghe.api.ExcelController;
 import com.zhanghe.autoconfig.annotation.ExcelExportMethodReturnHandler;
 import com.zhanghe.autoconfig.annotation.RequestParamExcelMethodArgumentResolver;
 import com.zhanghe.util.ExcelMapperUtil;
@@ -8,10 +9,14 @@ import com.zhanghe.util.SpringContextHelper;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -22,11 +27,16 @@ import java.util.List;
  * 主要还是配置导出的处理
  */
 @Configuration
-@AutoConfigureAfter({ ExcelHelperPropertyAutoConfiguration.class })
+@ConditionalOnClass({DispatcherServlet.class})
+@AutoConfigureAfter({ ExcelHelperPropertyAutoConfiguration.class, DispatcherServletAutoConfiguration.class})
 @ConditionalOnMissingBean(SpringMvcExcelParamConfig.class)
 public class SpringMvcExcelParamConfig implements InitializingBean {
    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
+   @Bean("excelAutoApi")
+   public ExcelController excelController(){
+       return new ExcelController();
+   }
     /**
      * 获取ExcelMapperUtil Bean的工厂
      * @return

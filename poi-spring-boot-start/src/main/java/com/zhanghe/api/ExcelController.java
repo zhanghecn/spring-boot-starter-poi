@@ -3,7 +3,7 @@ package com.zhanghe.api;
 
 import com.zhanghe.autoconfig.entity.ExcelEntity;
 import com.zhanghe.autoconfig.web.URIPathMappingHandlerAdapter;
-import com.zhanghe.exception.RRException;
+import com.zhanghe.exception.ExcelException;
 import com.zhanghe.util.ExcelMapperUtil;
 import com.zhanghe.util.excel.mapper.ExcelMappersEntity;
 import lombok.Data;
@@ -37,11 +37,15 @@ public class ExcelController implements ApplicationContextAware {
     ExcelMapperUtil excelMapperUtil;
     @Autowired
     //获取请求映射处理
-            RequestMappingHandlerMapping requestMappingHandlerMapping;
+    RequestMappingHandlerMapping requestMappingHandlerMapping;
     @Autowired
     RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
     URIPathMappingHandlerAdapter uriPathMappingHandlerAdapter;
+
+    public ExcelController() {
+        System.out.println("为什么被初始化？");
+    }
 
     @PostConstruct
     public void init(){
@@ -54,7 +58,7 @@ public class ExcelController implements ApplicationContextAware {
                                     HttpServletRequest request,
                                     HttpServletResponse response) throws Exception {
         if(multipartFiles.isEmpty()){
-            throw new RRException(String.format("表单请求中未检查%s的文件",excelFileName));
+            throw new ExcelException(String.format("表单请求中未检查%s的文件",excelFileName));
         }
         ExcelMapperUtil excelMapperUtil=      getExcelMapperUtil();
 
@@ -83,7 +87,7 @@ public class ExcelController implements ApplicationContextAware {
             uriPathMappingHandlerAdapter.handle(mapperRequest, response, handler.getHandler());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            throw new RRException(e.getMessage());
+            throw new ExcelException(e.getMessage());
         }finally {
             excelMappersEntity.close();
         }
