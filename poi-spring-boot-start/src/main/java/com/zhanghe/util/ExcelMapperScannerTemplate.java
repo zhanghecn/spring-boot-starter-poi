@@ -24,7 +24,9 @@ public class ExcelMapperScannerTemplate implements ExcelMapperUtil, BeanFactoryA
     private  Map<String, List<ExcelEntity>> excelEntitiesMap = new ConcurrentHashMap<>();
     private Lock lock = new ReentrantLock();
 
-    AnnotationBeanNameGenerator beanNameGenerator= AnnotationBeanNameGenerator.INSTANCE;
+    //TODO:这个只有新版本Spring有
+//    private static BeanNameGenerator beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
+    AnnotationBeanNameGenerator beanNameGenerator  = new AnnotationBeanNameGenerator();;
 
     public final static String BEAN_NAME = "excelMapperScannerTemplate";
 

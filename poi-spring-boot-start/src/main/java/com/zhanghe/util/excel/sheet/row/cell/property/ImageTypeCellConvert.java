@@ -5,6 +5,7 @@ import com.zhanghe.util.excel.type.PropertyAndColumn;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class ImageTypeCellConvert implements PropertyToCellDataConvert {
         int columnIndex = propertyAndColumn.getColumnIndex();
         Integer rowIndex =excelRow.get("rowIndex")==null?0: (Integer) excelRow.get("rowIndex");
         for (ImageType imageType : imageTypes) {
+            if(ObjectUtils.isEmpty(imageType.getData())){
+                continue;
+            }
             ClientAnchor anchor;
             //自定义位置
             if(imageType.isCustomOrientation()){

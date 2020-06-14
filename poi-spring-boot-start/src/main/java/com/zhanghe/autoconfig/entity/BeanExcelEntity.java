@@ -23,8 +23,10 @@ import java.util.Map;
  * @Date: 2020/5/27 15:02
  */
 public class BeanExcelEntity extends ExcelEntity implements Serializable {
-    private static BeanNameGenerator beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
-
+    //TODO:这个只有新版本Spring有
+//    private static BeanNameGenerator beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
+    //采用旧版本
+    private static BeanNameGenerator beanNameGenerator = new AnnotationBeanNameGenerator();;
     protected BeanExcelEntity() {
         super(ExcelEntity.builder());
     }
