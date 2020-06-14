@@ -2,10 +2,12 @@
 
 #### 介绍
 poi-spring-boot-zh
-
+ **里面示例由于时间问题，没有写完，很多示例需要慢慢补充，当然您也可以直接看源码，来了解会有什么功能** 
+#### VUE项目演示:https://gitee.com/zh2016976438/Spring-boot-poi-vue
 #### 软件架构
 软件架构说明
 Spring Boot 集成 POI
+
 
 支持实体类配置sheet DTO实体类
 
