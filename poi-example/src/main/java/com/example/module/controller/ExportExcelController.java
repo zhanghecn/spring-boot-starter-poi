@@ -1,7 +1,9 @@
 package com.example.module.controller;
 
 import com.example.module.model.dto.TestTypeExcelDTO;
+import com.example.module.service.impl.TestTypeServiceImpl;
 import com.zhanghe.autoconfig.annotation.ExcelExport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,19 +16,19 @@ import java.util.List;
 @RequestMapping("excel-export")
 public class ExportExcelController {
 
+    @Autowired
+    TestTypeServiceImpl testTypeService;
+
+    /**
+     * 可自动转换数据的导出展示
+     * @return
+     */
     @ExcelExport(exportClass = TestTypeExcelDTO.class)
     @RequestMapping("/testType")
     public List<TestTypeExcelDTO> testType(){
-        TestTypeExcelDTO testTypeExcelDTO = new TestTypeExcelDTO();
-        testTypeExcelDTO.setDate(new Date());
-        testTypeExcelDTO.setDecimal(new BigDecimal(99999));
-        testTypeExcelDTO.setText("哈哈哈2");
-        testTypeExcelDTO.setDecimal1(0.5f);
-        testTypeExcelDTO.setDecimal2(555);
-
-        List<TestTypeExcelDTO> list = new ArrayList<>();
-        list.add(testTypeExcelDTO);
-
-        return list;
+        List<TestTypeExcelDTO> testTypeExcelDTOS = testTypeService.exportList();
+        return testTypeExcelDTOS;
     }
+
+
 }
