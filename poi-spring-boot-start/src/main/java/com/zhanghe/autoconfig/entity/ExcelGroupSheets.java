@@ -30,11 +30,17 @@ public class ExcelGroupSheets {
 
     private String groupId;
 
+    private String fileName;
+
     private MultipartFile multipartFile;
 
     public ExcelGroupSheets(List<ExcelEntity> excelEntities, ExcelMapper excelMapper) {
         this.excelEntities = excelEntities;
         this.excelMapper = excelMapper;
+    }
+
+    public ExcelGroupSheets(String fileName) {
+        this.fileName = fileName;
     }
 
     public void init(){

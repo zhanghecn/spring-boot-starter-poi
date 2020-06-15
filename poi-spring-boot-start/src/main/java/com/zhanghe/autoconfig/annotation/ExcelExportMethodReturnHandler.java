@@ -76,7 +76,12 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
             ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             for (ExcelGroupSheets re : res) {
-                String file = exportFileName + (++i) + ".xlsx";
+                String file;
+                if(StringUtils.hasText(re.getFileName())){
+                    file = re.getFileName() + ".xlsx";
+                }else{
+                    file = exportFileName + (++i) + ".xlsx";
+                }
                 zipOutputStream.putNextEntry(new ZipEntry(file));
                 writeExcelGroupSheets(re,mergedAnnotation,excelMapperUtil,byteArrayOutputStream);
                 zipOutputStream.write(byteArrayOutputStream.toByteArray());
