@@ -95,11 +95,11 @@ public class CommonSetCell implements PropertyToCellDataConvert {
 
     /**
      * 设置值，并且给与样式
-     * @param cell
-     * @param val
-     * @param propertyAndColumn
-     * @param cellStyle
-     * @return
+     * @param cell 列
+     * @param val 写入值
+     * @param propertyAndColumn 属性和列的信息
+     * @param cellStyle 样式
+     * @return 是否设置成功
      */
     public boolean setAndStyle(Cell cell, Object val, PropertyAndColumn propertyAndColumn, CellStyle cellStyle) {
         setStyle(cell,cellStyle);

@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Bean => ExcelEntity
- * @Author: ZhangHe
- * @Date: 2020/5/27 15:02
+ * Bean转ExcelEntity
+ * @author: ZhangHe
+ * @since: 2020/5/27 15:02
  */
 public class BeanExcelEntity extends ExcelEntity implements Serializable {
     //TODO:这个只有新版本Spring有
@@ -32,10 +32,12 @@ public class BeanExcelEntity extends ExcelEntity implements Serializable {
     }
 
     /**
-     * 从ExcelGroupEntity bean定义集合转换成  Map<String, List<ExcelEntity>>
-     * @param beanDefinitions
-     * @return
+     * 从ExcelGroupEntity bean定义集合转换成
+     * @param beanDefinitions bean定义信息
+     * @return Map
+     * @throws ClassNotFoundException ClassNotFoundException
      */
+
     public static Map<String, List<ExcelEntity>> getExcelEntities(List<GenericBeanDefinition> beanDefinitions) throws ClassNotFoundException {
         Map<String, List<ExcelEntity>> excelEntities = new HashMap<>();
         List<GenericBeanDefinition> scannerBeans = beanDefinitions;

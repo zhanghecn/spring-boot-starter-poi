@@ -11,10 +11,9 @@ import org.springframework.util.ClassUtils;
 import java.util.function.Consumer;
 
 /**
- * @Author ZhangHe
- * @Description:
- * @Date 2020/2/21 11:06
- * @Version 1.0
+ * @author ZhangHe
+ * @since 2020/2/21 11:06
+ *  1.0
  **/
 public class ColumnStyleCellConvert implements PropertyToCellDataConvert {
    Logger logger = LoggerFactory.getLogger(ColumnStyleCellConvert.class);

@@ -31,8 +31,8 @@ public class URIPathMappingHandlerAdapter extends RequestMappingHandlerAdapter {
 
     /**
      * 创建执行这个路径的方法  在RequestMappingHandlerAdapter invokeHandlerMethod的模板方法里面使用
-     * @param handlerMethod
-     * @return
+     * @param handlerMethod 处理方法
+     *
      */
     @Override
     protected ServletInvocableHandlerMethod createInvocableHandlerMethod(HandlerMethod handlerMethod) {
@@ -45,7 +45,7 @@ public class URIPathMappingHandlerAdapter extends RequestMappingHandlerAdapter {
 
     /**
      * 获取所有excel参数解析 如SheetHandlerList 等
-     * @return
+     *
      */
     private List<ExcelMethodParamsHandler> getExcelMethodParamsHandlers() {
         ApplicationContext applicationContext = getApplicationContext();

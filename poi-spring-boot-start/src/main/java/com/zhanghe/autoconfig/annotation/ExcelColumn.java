@@ -11,10 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Indexed
 public @interface ExcelColumn {
-    /**
-     * 下面2个是对应的列对应的位置
-     * @return
-     */
+
     @AliasFor("columnIndex")
     int value() default 0;
     @AliasFor("value")

@@ -32,7 +32,7 @@ public class ExcelObjectMapperSuper extends AbstractExcelEntityObjectMapper {
 
     /**
      * 获取excel
-     * @param template
+     * @param template poi workbook
      */
     @Override
     public void getExcel(Workbook template,List<?> list) {
@@ -53,9 +53,9 @@ public class ExcelObjectMapperSuper extends AbstractExcelEntityObjectMapper {
 
     /**
      * 通过是否存在模板名称，确定是否需要创建sheet获取
-     * @param template
-     * @param sheetIndex
-     * @return
+     * @param template poi workbook
+     * @param sheetIndex sheet下标
+     *
      */
     private Sheet getSheet(Workbook template, int sheetIndex) {
         Sheet sheet;

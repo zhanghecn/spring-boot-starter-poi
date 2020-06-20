@@ -6,8 +6,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * @Author: ZhangHe
- * @Date: 2020/5/29 8:51
+ * @author: ZhangHe
+ * @since: 2020/5/29 8:51
  */
 public abstract class AbstractSheetHandler extends AbstractSheetInfoType implements SheetHandler{
     public AbstractSheetHandler(SheetHandlerInfo sheetInfo) {

@@ -5,8 +5,8 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 抽离出来的配置
- * @Author: ZhangHe
- * @Date: 2020/5/23 14:00
+ * @author: ZhangHe
+ * @since: 2020/5/23 14:00
  */
 @Data
 @SuperBuilder(toBuilder = true)

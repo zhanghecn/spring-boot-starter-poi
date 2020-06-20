@@ -6,8 +6,8 @@ import lombok.Data;
 import java.util.Map;
 
 /**
- * @Author: ZhangHe
- * @Date: 2020/5/26 15:08
+ * @author: ZhangHe
+ * @since: 2020/5/26 15:08
  */
 @Data
 public abstract class AbstractSheetInfoType {

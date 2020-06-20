@@ -7,9 +7,8 @@ import org.apache.poi.ss.usermodel.CellType;
 import java.math.BigDecimal;
 
 /**
- * @Author: Yin BenLi
- * @Description: 大数据转换类型
- * @Date: Create in 8:43 2020/5/27
+ * @author: Yin BenLi
+ * @since: Create in 8:43 2020/5/27
  */
 public class BigDecimalConvert implements CellDataToPropertyConvert {
     @Override

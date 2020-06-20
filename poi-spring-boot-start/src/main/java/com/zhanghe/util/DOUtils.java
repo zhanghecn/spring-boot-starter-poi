@@ -27,10 +27,10 @@ public abstract class DOUtils {
 
     /**
      * 一个集合类型转换另一种类型的集合
-     * @param src
-     * @param copy
-     * @param <T>
-     * @return
+     * @param src 来源
+     * @param copy 拷贝
+     * @param <T>   拷贝什么类型
+     * @return T
      */
     public static <T> List<T> copyList(Collection<?> src,Class<T> copy){
        Assert.isTrue(src!=null,"无法获取null的参数");
@@ -44,10 +44,10 @@ public abstract class DOUtils {
 
     /**
      * 把对象copy到指定类型
-     * @param o
-     * @param copy
-     * @param <T>
-     * @return
+     * @param o 复制的对象
+     * @param copy 到什么类型
+     * @param <T> 类型
+     * @return T
      */
    public static <T>T copyProperties(Object o,Class<T> copy){
        T t = BeanUtils.instantiateClass(copy);
@@ -57,8 +57,8 @@ public abstract class DOUtils {
 
     /**
      * 对象copy到对象
-     * @param src
-     * @param to
+     * @param src 来源类型
+     * @param to    到什么类型
      */
     public static void copyObject(Object src,Object to){
         BeanUtils.copyProperties(src,to);
@@ -66,8 +66,8 @@ public abstract class DOUtils {
 
     /**
      * copy 对象忽略空的属性
-     * @param src
-     * @param to
+     * @param src 来源类型
+     * @param to    到什么类型
      */
     public static void copyObjectIgnoreNull(Object src,Object to){
         Class<?> targetPd = to.getClass();
@@ -109,7 +109,7 @@ public abstract class DOUtils {
 
     /**
      * 清空空字符串 用做mybatis 忽略 null查询
-     * @param to
+     * @param to 什么类型
      */
     public  static void cleanEmptyString(Object to){
         cleanEmptyString(to,to.getClass());
@@ -117,9 +117,9 @@ public abstract class DOUtils {
 
     /**
      * 获取空字符串字段
-     * @param to
-     * @param targetPd
-     * @return
+     * @param to 什么类型
+     * @param targetPd 目标类型
+     * @return Set
      */
     public static Set<String> getIgnoreNames(Object to, Class<?> targetPd) {
         PropertyDescriptor[] propertyDescriptors = BeanUtils.getPropertyDescriptors(targetPd);
@@ -147,8 +147,8 @@ public abstract class DOUtils {
 
     /**
      * 对象到map
-     * @param src
-     * @return
+     * @param src 来源类型
+     * @return Map
      */
     public static Map<String,Object> toMap(Object src)
     {
@@ -166,10 +166,8 @@ public abstract class DOUtils {
         return null;
     }
 
-    /**
+    /*
      * map到对象
-     * @param
-     * @return
      */
     public static <T> T toObject(Map<String,Object> map, Class<T> c)
     {

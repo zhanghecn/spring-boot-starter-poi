@@ -29,10 +29,10 @@ public class MapUtils extends HashMap<String, Object> {
 
     /**
      * 逆转key value
-     * @param map
-     * @param <TWO>
-     * @param <ONE>
-     * @return
+     * @param map map
+     * @param <TWO> value
+     * @param <ONE>  key
+     * @return Map
      */
     public static <TWO,ONE>Map<TWO, ONE> valueKeyReverse(Map<ONE,TWO> map){
         if(map==null){

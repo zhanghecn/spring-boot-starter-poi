@@ -28,8 +28,8 @@ public interface ExcelMapperUtil {
 
     /**
      * 得到其中存在的uri
-     * @param excelEntities
-     * @return
+     * @param excelEntities 配置实体信息
+     * @return String
      */
     static String getURI(List<ExcelEntity> excelEntities){
         if(excelEntities!=null && !excelEntities.isEmpty()){

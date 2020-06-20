@@ -9,10 +9,9 @@ import org.apache.poi.ss.usermodel.Row;
 import java.util.function.Consumer;
 
 /**
- * @Author ZhangHe
- * @Description: excel列样式
- * @Date 2020/2/20 17:28
- * @Version 1.0
+ * @author ZhangHe
+ * @since 2020/2/20 17:28
+ *  1.0
  **/
 @Data
 public class ColumnStyle {

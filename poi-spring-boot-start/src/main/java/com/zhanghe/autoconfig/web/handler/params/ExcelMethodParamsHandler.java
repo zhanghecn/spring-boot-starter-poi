@@ -7,9 +7,9 @@ import org.springframework.core.ResolvableType;
 public interface ExcelMethodParamsHandler {
     /**
      * 根据value进一步判断是否可以转换
-     * @param methodParameter
-     * @param value
-     * @return
+     * @param methodParameter 方法参数
+     * @param value 值
+     * @return 是否可以转换
      */
     default   boolean canConvert(MethodParameter methodParameter, Object value){
         return isAssignable(methodParameter);
@@ -21,18 +21,11 @@ public interface ExcelMethodParamsHandler {
         return val instanceof ExcelMappersEntity;
     }
 
-    /**
-     * 获取原类 对于@ExcelParam 自动读取参数类使用
-     * @return
-     */
+
     default Class<?> getRawClass(MethodParameter methodParameter){
         return Class.class;
     }
 
-    /**
-     * 获取原类 对于@ExcelParam 自动读取参数类使用
-     * @return
-     */
     default Class<?> getRawClassByList(MethodParameter methodParameter){
         ResolvableType resolvableType = ResolvableType.forMethodParameter(methodParameter);
         return resolvableType.getGeneric(0).getRawClass();
@@ -40,8 +33,8 @@ public interface ExcelMethodParamsHandler {
 
     /**
      * 是否可以转换这个类型
-     * @param methodParameter
-     * @return
+     * @param methodParameter 方法参数
+     * @return 是否可以分配到这个类型
      */
     boolean isAssignable(MethodParameter methodParameter);
 }

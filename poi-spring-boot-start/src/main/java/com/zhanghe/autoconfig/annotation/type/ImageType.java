@@ -13,8 +13,8 @@ import java.util.Collection;
 
 /**
  * Excel图片类型
- * @Author: ZhangHe
- * @Date: 2020/5/25 10:28
+ * @author: ZhangHe
+ * @since: 2020/5/25 10:28
  */
 @Data
 @NoArgsConstructor
@@ -103,7 +103,7 @@ public class ImageType {
     }
     /**
      * 一般导入的时候获取图片信息
-     * @param picture
+     * @param picture 图片
      */
     public ImageType(Picture picture) {
         PictureData pictureData = picture.getPictureData();

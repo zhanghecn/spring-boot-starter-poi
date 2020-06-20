@@ -56,7 +56,7 @@ public class SheetHandlerAdapter extends AbstractSheetInfoType implements SheetH
     /**
      * 转换成需求的类型
      * @param condition 转换的条件
-     * @return
+     *
      */
     @Override
     public List getObjects(Predicate<Sheet> condition){
@@ -121,8 +121,8 @@ public class SheetHandlerAdapter extends AbstractSheetInfoType implements SheetH
 
     /**
      * 写入扩展头部标题
-     * @param sheet
-     * @param currentValue
+     * @param sheet sheet页
+     * @param currentValue 当前值
      */
     @Override
     public void writeExtendHeaders(Sheet sheet, Map<Integer, String> currentValue) {
@@ -172,7 +172,7 @@ public class SheetHandlerAdapter extends AbstractSheetInfoType implements SheetH
     /**
      * 比较sheet页是否一样
      * @param sheet 比较的sheet
-     * @return
+     *
      */
     public boolean comparison(SheetHandlerInfo sheet){
         //没有头部直接true

@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
+/*
  * 注解扫描类
- * @Author: ZhangHe
- * @Date: 2020/5/25 10:34
+ * @author: ZhangHe
+ * @since: 2020/5/25 10:34
  */
 public class ClassPathAnnotationScannerClass extends ClassPathBeanDefinitionScanner {
     public ClassPathAnnotationScannerClass() {
@@ -111,8 +111,8 @@ public class ClassPathAnnotationScannerClass extends ClassPathBeanDefinitionScan
 
     /**
      * 初始化扫包
-     * @param annotationClass
-     * @param packages
+     * @param annotationClass 注解类
+     * @param packages   包
      */
     public void init(Class<? extends Annotation> annotationClass,List<String> packages){
         setAnnotationClass(annotationClass);

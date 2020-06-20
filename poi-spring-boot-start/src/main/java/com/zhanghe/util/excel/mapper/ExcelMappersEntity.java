@@ -36,8 +36,8 @@ public class ExcelMappersEntity implements Closeable {
 
     /**
      * 添加文件excel映射器
-     * @param excelMapperArray
-     * @param multipartFile
+     * @param excelMapperArray  excel映射类数组
+     * @param multipartFile 添加springmvc 处理的文件
      */
     public void add(ExcelMapper[] excelMapperArray, MultipartFile multipartFile){
         if(this.excelMappers==null){

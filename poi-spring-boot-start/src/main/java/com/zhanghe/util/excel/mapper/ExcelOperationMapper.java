@@ -11,14 +11,14 @@ import java.util.function.Predicate;
 
 /**
  * 操作Excel 映射的方法
- * @Author: ZhangHe
- * @Date: 2020/4/22 16:33
+ * @author: ZhangHe
+ * @since: 2020/4/22 16:33
  */
 public interface ExcelOperationMapper {
     /**
      * 通过配置转换实体类
      * @param excelEntity 实体类配置
-     * @return
+     * @return List
      */
     List list(ExcelEntity excelEntity);
 
@@ -43,14 +43,14 @@ public interface ExcelOperationMapper {
      * 通过实体类配置 和 对应筛选条件 进行筛选获取
      * @param excelEntity 实体类配置
      * @param sheetPredicate 筛选条件
-     * @return
+     * @return List
      */
     List list(ExcelEntity excelEntity, Predicate<Sheet> sheetPredicate);
 
     /**
      * 通过配置转换sheet封装类
-     * @param excelEntity
-     * @return
+     * @param excelEntity excel配置实体类
+     * @return SheetHandlerWrap
      */
     SheetHandlerWrap sheetHandlerWrap(ExcelEntity excelEntity);
 }

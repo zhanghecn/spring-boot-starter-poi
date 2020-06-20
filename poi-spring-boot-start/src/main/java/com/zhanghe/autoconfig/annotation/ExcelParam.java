@@ -10,9 +10,8 @@ import java.lang.annotation.*;
 @Documented
 @Indexed
 public @interface ExcelParam {
-    /**
+    /*
      * 配置名
-     * @return
      */
     @AliasFor("configName")
     String value() default "";
@@ -22,9 +21,8 @@ public @interface ExcelParam {
 
 
 
-    /**
+    /*
      *  上传的文件的表单参数名称key
-     * @return
      */
     String name() default "";
 }

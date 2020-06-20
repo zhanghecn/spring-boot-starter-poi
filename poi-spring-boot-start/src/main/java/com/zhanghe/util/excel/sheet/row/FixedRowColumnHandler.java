@@ -20,8 +20,8 @@ import org.springframework.beans.BeanWrapper;
 
 /**
  * 固定行列获取
- * @Author: ZhangHe
- * @Date: 2020/5/26 17:01
+ * @author: ZhangHe
+ * @since: 2020/5/26 17:01
  */
 @Data
 public class FixedRowColumnHandler implements RowHandler {
@@ -44,7 +44,7 @@ public class FixedRowColumnHandler implements RowHandler {
 
     /**
      * 与平常的行对象不同，这个行对象就是列的值
-     * @return
+     *
      */
     @Override
     public Object getObject() {
@@ -73,7 +73,7 @@ public class FixedRowColumnHandler implements RowHandler {
 
     /**
      * 与平常写入对象一行不同，这个就是写入一列的值
-     * @param o
+     * @param o 写入的对象
      */
     @Override
     public void writeRow(Object o) {
