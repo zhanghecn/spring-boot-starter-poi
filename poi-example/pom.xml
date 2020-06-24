@@ -12,9 +12,9 @@
     <artifactId>poi-example</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.zhanghe</groupId>
-            <artifactId>poi-spring-boot-start</artifactId>
-            <version>2.2.7-SNAPSHOT</version>
+            <groupId>com.github.zhanghecn</groupId>
+            <artifactId>poi-spring-boot-starter</artifactId>
+            <version>2.2.7</version>
         </dependency>
     </dependencies>
     <build>

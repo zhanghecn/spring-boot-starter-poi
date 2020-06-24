@@ -10,19 +10,6 @@ Spring Boot 集成 POI
 
 
 支持实体类配置sheet DTO实体类
-####  maven依赖
-
-
-```
- <!-- https://mvnrepository.com/artifact/com.github.zhanghecn/poi-spring-boot-start -->
-<dependency>
-    <groupId>com.github.zhanghecn</groupId>
-    <artifactId>poi-spring-boot-start</artifactId>
-    <version>2.2.7-RELEASE</version>
-</dependency>
-```
-
-
 
 ##### 导出
 支持图片导出
