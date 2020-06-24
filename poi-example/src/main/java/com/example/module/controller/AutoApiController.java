@@ -34,7 +34,6 @@ public class AutoApiController {
      * 访问 /excel/import/testTypeExcelDTO 来进行映射到这个接口
      * @param testTypeExcelDTOS
      * @param otherParam
-     * @return
      *
      */
     @PostMapping("/testType")
@@ -48,7 +47,7 @@ public class AutoApiController {
      * 对应映射 TestTypeExcelDTO2
      * @param testTypeExcelDTOS
      * @param otherParam
-     * @return
+     *
      */
     @PostMapping("/testType2")
     public ResultMap testType2(SheetHandlerList<TestTypeExcelDTO2> testTypeExcelDTOS, String otherParam){
