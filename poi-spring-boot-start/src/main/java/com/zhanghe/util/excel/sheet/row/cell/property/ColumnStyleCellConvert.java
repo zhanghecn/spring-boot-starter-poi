@@ -66,6 +66,6 @@ public class ColumnStyleCellConvert implements PropertyToCellDataConvert {
 
     @Override
     public boolean canConvert(Class<?> c, PropertyAndColumn propertyAndColumn) {
-        return ClassUtils.isAssignable(c, ColumnStyle.class);
+        return ClassUtils.isAssignable(ColumnStyle.class,c);
     }
 }

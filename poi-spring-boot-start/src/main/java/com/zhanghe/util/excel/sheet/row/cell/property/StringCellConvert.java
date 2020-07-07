@@ -3,17 +3,17 @@ package com.zhanghe.util.excel.sheet.row.cell.property;
 import com.zhanghe.util.excel.type.PropertyAndColumn;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.springframework.util.ClassUtils;
 
 public class StringCellConvert implements PropertyToCellDataConvert {
     @Override
     public boolean setConvert(Cell cell, Object val,  PropertyAndColumn propertyAndColumn) {
-        cell.setCellType(CellType.STRING);
-        cell.setCellValue(val+"");
+        cell.setCellValue(String.valueOf(val));
         return true;
     }
 
     @Override
     public boolean canConvert(Class<?> c, PropertyAndColumn propertyAndColumn) {
-        return true;
+        return ClassUtils.isAssignable(CharSequence.class,c);
     }
 }

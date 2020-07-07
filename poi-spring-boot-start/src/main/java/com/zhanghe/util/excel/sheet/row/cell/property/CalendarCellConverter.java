@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.util.ClassUtils;
 
 import java.util.Calendar;
 
@@ -20,7 +21,6 @@ public class CalendarCellConverter implements PropertyToCellDataConvert {
             if(convert==null){
                 return false;
             }
-            cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(convert);
         } catch (Exception e) {
             return false;
@@ -30,6 +30,6 @@ public class CalendarCellConverter implements PropertyToCellDataConvert {
 
     @Override
     public boolean canConvert(Class<?> c, PropertyAndColumn propertyAndColumn) {
-        return conversionService.canConvert(c, Calendar.class);
+        return ClassUtils.isAssignable(Calendar.class,c);
     }
 }

@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.util.ClassUtils;
 
 public class BooleanCellConvert implements PropertyToCellDataConvert {
     ConversionService conversionService = DefaultConversionService.getSharedInstance();
@@ -15,7 +16,6 @@ public class BooleanCellConvert implements PropertyToCellDataConvert {
             if(convert==null){
                 return false;
             }
-            cell.setCellType(CellType.BOOLEAN);
             cell.setCellValue(convert);
         } catch (Exception e) {
           return false;
@@ -25,6 +25,6 @@ public class BooleanCellConvert implements PropertyToCellDataConvert {
 
     @Override
     public boolean canConvert(Class<?> c, PropertyAndColumn propertyAndColumn) {
-        return conversionService.canConvert(c,Boolean.class);
+        return ClassUtils.isAssignable(boolean.class,c);
     }
 }

@@ -27,8 +27,9 @@ public class CommonSetCell implements PropertyToCellDataConvert {
         this.propertyToCellDataConverts.add(new DateCellConvert());
         this.propertyToCellDataConverts.add(new ImageTypeCellConvert());
         this.propertyToCellDataConverts.add(new ColumnStyleCellConvert());
-        this.addSpringBeanCellConverts();
         this.propertyToCellDataConverts.add(new StringCellConvert());
+        this.addSpringBeanCellConverts();
+        this.propertyToCellDataConverts.add(new MethodExpressionConverter());
     }
 
     /**
