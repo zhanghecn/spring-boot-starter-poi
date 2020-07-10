@@ -61,8 +61,8 @@ public class ImageTypeCellConvert implements PropertyToCellDataConvert {
 
     /**
      * 是否为图片类型
-     * @param propertyAndColumn
-     * @return
+     * @param propertyAndColumn 属性和列
+     * @return 是图片类型
      */
     protected boolean isImageType(PropertyAndColumn propertyAndColumn){
         PropertyDescriptor propertyDescriptor = propertyAndColumn.getPropertyDescriptor();
@@ -73,8 +73,8 @@ public class ImageTypeCellConvert implements PropertyToCellDataConvert {
 
     /**
      * 是否为集合图片类型
-     * @param propertyAndColumn
-     * @return
+     * @param propertyAndColumn 属性和列
+     * @return 是集合图片类型
      */
     protected boolean isListImageType(PropertyAndColumn propertyAndColumn){
         PropertyDescriptor propertyDescriptor = propertyAndColumn.getPropertyDescriptor();

@@ -2,9 +2,9 @@ package com.zhanghe.poi.util.excel.sheet.row.cell.property;
 
 import com.zhanghe.poi.util.excel.type.PropertyAndColumn;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.util.ClassUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,6 @@ public class DoubleCellConverter implements PropertyToCellDataConvert {
             if(convert==null||!mer.find()){
                 return false;
             }
-            cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(convert);
         } catch (Exception e) {
             return false;
@@ -34,6 +33,6 @@ public class DoubleCellConverter implements PropertyToCellDataConvert {
 
     @Override
     public boolean canConvert(Class<?> c,PropertyAndColumn propertyAndColumn) {
-        return c!=Long.class&&c!=long.class&&conversionService.canConvert(c,Double.class);
+        return ClassUtils.isAssignable(double.class,c);
     }
 }

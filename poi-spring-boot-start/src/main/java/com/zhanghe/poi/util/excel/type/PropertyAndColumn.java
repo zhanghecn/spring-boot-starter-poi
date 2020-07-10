@@ -8,8 +8,8 @@ import java.util.Map;
 
 /**
  * 对象的属性和对应的Excel列的信息
- * @Author: ZhangHe
- * @Date: 2020/4/22 17:09
+ * @author: ZhangHe
+ * @since: 2020/4/22 17:09
  */
 @Data
 public class PropertyAndColumn {

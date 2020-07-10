@@ -39,7 +39,7 @@ public class SpringMvcExcelParamConfig implements InitializingBean {
    }
     /**
      * 获取ExcelMapperUtil Bean的工厂
-     * @return
+     * @return FactoryBean
      */
     public FactoryBean<ExcelMapperUtil> factoryBean(){
         return new FactoryBean<ExcelMapperUtil>() {
@@ -62,7 +62,6 @@ public class SpringMvcExcelParamConfig implements InitializingBean {
 
     /**
      * 按照顺序把导出放在第一个处理
-     * @throws Exception
      */
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -75,7 +74,6 @@ public class SpringMvcExcelParamConfig implements InitializingBean {
 
     /**
      * 导入解析
-     * @throws Exception
      */
     @Configuration
     public static class SpringMVCArgumentAutoConfig implements  WebMvcConfigurer{

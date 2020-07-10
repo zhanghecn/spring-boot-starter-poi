@@ -9,10 +9,9 @@ import org.apache.poi.ss.usermodel.Row;
 import java.util.function.Consumer;
 
 /**
- * @Author ZhangHe
- * @Description: excel列样式
- * @Date 2020/2/20 17:28
- * @Version 1.0
+ * @author ZhangHe
+ * @since 2020/2/20 17:28
+ *  1.0
  **/
 @Data
 public class ColumnStyle {
@@ -40,5 +39,42 @@ public class ColumnStyle {
     }
 
     public ColumnStyle() {
+    }
+
+    public static StyleBuilder styleBuilder(){
+        return new StyleBuilder();
+    }
+    public static class StyleBuilder{
+        private ColumnStyle columnStyle;
+        public StyleBuilder() {
+            columnStyle = new ColumnStyle();
+        }
+
+        public StyleBuilder cellStyle(Consumer<CellStyle> cellStyleConsumer){
+            columnStyle.cellStyle = cellStyleConsumer;
+            return this;
+        }
+        public StyleBuilder rowProperty(Consumer<Row> rowConsumer){
+            columnStyle.rowProperty = rowConsumer;
+            return this;
+        }
+        public StyleBuilder cellProperty(Consumer<Cell> cellConsumer){
+            columnStyle.cellProperty = cellConsumer;
+            return this;
+        }
+
+        public StyleBuilder fontProperty(Consumer<Font> fontConsumer){
+            columnStyle.fontProperty = fontConsumer;
+            return this;
+        }
+
+        public StyleBuilder mergeRowColumn(int mergeRowNum, int mergeColumnNum){
+            columnStyle.mergeColumnNum =  mergeColumnNum;
+            columnStyle.mergeColumnNum = mergeColumnNum;
+            return this;
+        }
+        public ColumnStyle build(){
+            return columnStyle;
+        }
     }
 }

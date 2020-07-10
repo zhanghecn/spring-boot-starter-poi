@@ -11,10 +11,9 @@ import org.springframework.util.ClassUtils;
 import java.util.function.Consumer;
 
 /**
- * @Author ZhangHe
- * @Description:
- * @Date 2020/2/21 11:06
- * @Version 1.0
+ * @author ZhangHe
+ * @since 2020/2/21 11:06
+ *  1.0
  **/
 public class ColumnStyleCellConvert implements PropertyToCellDataConvert {
    Logger logger = LoggerFactory.getLogger(ColumnStyleCellConvert.class);
@@ -55,18 +54,20 @@ public class ColumnStyleCellConvert implements PropertyToCellDataConvert {
         int mergeRowNum = columnStyle.getMergeRowNum();
         int mergeColumnNum = columnStyle.getMergeColumnNum();
 
-        CellRangeAddress cellAddresses = new CellRangeAddress(rowIndex,rowIndex+mergeRowNum,columnIndex,columnIndex+mergeColumnNum);
-        try {
-            sheet.addMergedRegion(cellAddresses);
-        } catch (IllegalStateException e) {
-            logger.error("error:合并区域重叠,合并样式添加失败!",e);
-           // e.printStackTrace();
+        if(mergeRowNum>0||mergeColumnNum>0) {
+            CellRangeAddress cellAddresses = new CellRangeAddress(rowIndex, rowIndex + mergeRowNum, columnIndex, columnIndex + mergeColumnNum);
+            try {
+                sheet.addMergedRegion(cellAddresses);
+            } catch (IllegalStateException e) {
+                logger.error("error:合并区域重叠,合并样式添加失败!", e);
+                // e.printStackTrace();
+            }
         }
         return true;
     }
 
     @Override
     public boolean canConvert(Class<?> c, PropertyAndColumn propertyAndColumn) {
-        return ClassUtils.isAssignable(c, ColumnStyle.class);
+        return ClassUtils.isAssignable(ColumnStyle.class,c);
     }
 }

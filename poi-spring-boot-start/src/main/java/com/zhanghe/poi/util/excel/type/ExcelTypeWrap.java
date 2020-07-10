@@ -81,7 +81,7 @@ public class ExcelTypeWrap  extends AbstractExcelMapperType {
 
     /**
      * 扩展头部标题信息
-     * @param headers
+     * @param headers 头部下标
      */
     protected void extendHeaders(Map<Integer, String> headers) {
         Map<Integer, String> currentValue = getCurrentValue();
@@ -92,11 +92,11 @@ public class ExcelTypeWrap  extends AbstractExcelMapperType {
 
     /**
      * 通过属性名称和列注解 属性类型封装PropertyAndColumn
-     * @param propertyType
-     * @param name
-     * @param mergedAnnotation
-     * @param propertyDescriptor
-     * @return
+     * @param propertyType 属性和列
+     * @param name 名称
+     * @param mergedAnnotation 桥接的注解
+     * @param propertyDescriptor  属性描述
+     * @return PropertyAndColumn
      */
     public PropertyAndColumn getComponentColumn(Class<?> propertyType, String name, ExcelColumn mergedAnnotation, PropertyDescriptor propertyDescriptor){
         int value = mergedAnnotation.value();
@@ -116,13 +116,13 @@ public class ExcelTypeWrap  extends AbstractExcelMapperType {
 
     /**
      * 封装基本PropertyAndColumn基础上对应头部标题
-     * @param headers
-     * @param indexes
-     * @param propertyType
-     * @param name
-     * @param mergedAnnotation
-     * @param propertyDescriptor
-     * @return
+     * @param headers 头部信息
+     * @param indexes 头部下标
+     * @param propertyType 属性类型
+     * @param name 名称
+     * @param mergedAnnotation 桥接注解
+     * @param propertyDescriptor 属性描述
+     * @return PropertyAndColumn
      */
     public PropertyAndColumn getPropertyAndColumn(Map<String, Integer> headers,Map<Integer, String> indexes, Class<?> propertyType, String name, ExcelColumn mergedAnnotation,PropertyDescriptor propertyDescriptor) {
         PropertyAndColumn propertyAndColumn = getComponentColumn(propertyType, name, mergedAnnotation, propertyDescriptor);
@@ -143,7 +143,7 @@ public class ExcelTypeWrap  extends AbstractExcelMapperType {
 
     /**
      * 把列信息储存起来
-     * @param values
+     * @param values 属性和列信息
      */
     protected void addHandlerMapProperty(Collection<PropertyAndColumn> values) {
         this.propertyAndColumns.addAll(values);
@@ -187,7 +187,7 @@ public class ExcelTypeWrap  extends AbstractExcelMapperType {
 
     /**
      * 把对象中的map字段 去 和 头部标题信息 转换为PropertyAndColumn 添加
-     * @param indexes
+     * @param indexes 头部下标
      */
     protected void handlerNoDetailProAndColumns( Map<Integer, String> indexes) {
         if(indexes==null||mapPropertyAndColumns.isEmpty()){

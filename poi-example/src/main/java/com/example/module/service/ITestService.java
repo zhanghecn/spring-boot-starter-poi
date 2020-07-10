@@ -1,8 +1,9 @@
 package com.example.module.service;
 
 
-import com.zhanghe.autoconfig.entity.ExcelGroupSheets;
-import com.zhanghe.autoconfig.entity.SheetHandlerList;
+
+import com.zhanghe.poi.autoconfig.entity.ExcelGroupSheets;
+import com.zhanghe.poi.autoconfig.entity.SheetHandlerList;
 
 import java.util.List;
 

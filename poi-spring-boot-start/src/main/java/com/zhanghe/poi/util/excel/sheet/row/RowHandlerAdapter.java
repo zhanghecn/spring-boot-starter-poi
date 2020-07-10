@@ -47,7 +47,7 @@ public class RowHandlerAdapter implements RowHandler{
 
     /**
      * 获取对象
-     * @return
+     *
      */
    public Object getObject(){
        Row row = rowHandlerInfo.getRow();

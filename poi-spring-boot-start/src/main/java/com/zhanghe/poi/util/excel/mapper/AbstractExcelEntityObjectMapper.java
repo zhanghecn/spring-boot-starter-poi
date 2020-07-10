@@ -17,8 +17,8 @@ import java.lang.reflect.Constructor;
 
 /**
  * excel实体配置 操作 映射的抽象辅助类
- * @Author: ZhangHe
- * @Date: 2020/4/22 16:06
+ * @author: ZhangHe
+ * @since: 2020/4/22 16:06
  */
 public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapper {
     /**
@@ -32,8 +32,10 @@ public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapp
 
     /**
      * 获取sheet页的操作对象
-     * @param workbook
-     * @return
+     * @param workbook poi workbook
+     * @param sheetHand sheetHand
+     * @param <T> sheetHand
+     * @return T
      */
     protected <T> T getSheetHandlerAdapter(Workbook workbook, Class<T> sheetHand){
         return getSheetHandlerAdapter(workbook,null,null,sheetHand);
@@ -41,7 +43,7 @@ public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapp
 
     /**
      * 通过是否标准sheet页确定处理适配器的类
-     * @return
+     * @return SheetHandler
      */
     protected Class<? extends SheetHandler> getAutoHandlerAdapterClass(){
         Class<? extends SheetHandler> handClass;
@@ -56,10 +58,15 @@ public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapp
         }
         return handClass;
     }
+
     /**
      * 获取sheet页的操作对象
-     * @param workbook
-     * @return
+     * @param workbook workbook
+     * @param fileName fileName
+     * @param inputStream inputStream
+     * @param sheetHand sheetHand
+     * @param <T> T
+     * @return T
      */
     protected <T> T getSheetHandlerAdapter(Workbook workbook, String fileName, InputStream inputStream, Class<T> sheetHand)  {
 
@@ -89,10 +96,8 @@ public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapp
         return getSheetHandlerInfo(startRow, clazz, sheetAt, workbook);
     }
 
-    /**
+    /*
      * 获取当前sheet页的信息
-     * @param workbook
-     * @return
      */
     protected SheetHandlerInfo getSheetHandlerInfo(int startRow, Class<?> clazz, Sheet sheetAt,Workbook workbook) {
         SheetHandlerInfo sheetHandlerInfo = new SheetHandlerInfo(sheetAt, startRow, clazz,workbook);
@@ -103,7 +108,8 @@ public abstract class AbstractExcelEntityObjectMapper implements ExcelObjectMapp
     /**
      * 比对模板是否一样
      * @param template 自己的模板
-     * @return
+     * @param sheetHandlerInfo1 对方的sheet信息
+     * @return boolean
      */
     public boolean comparison(Workbook template, SheetHandlerInfo sheetHandlerInfo1){
         //获取第几个sheet页

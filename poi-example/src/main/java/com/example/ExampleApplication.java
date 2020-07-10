@@ -1,6 +1,6 @@
 package com.example;
 
-import com.zhanghe.autoconfig.annotation.ExcelConfigurationScanner;
+import com.zhanghe.poi.autoconfig.annotation.ExcelConfigurationScanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

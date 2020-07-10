@@ -13,10 +13,7 @@ import java.lang.annotation.*;
 @Documented
 @Indexed
 public @interface ExcelRow {
-    /**
-     * 下面2个是对应的行对应的位置
-     * @return
-     */
+
     @AliasFor("rowIndex")
     int value() default 0;
     @AliasFor("value")

@@ -24,7 +24,8 @@ public @interface ExcelExport {
 
     /**
      * 打包zip
-     * @return
+     *  是否可以打包
+     * @return 返回打包是否可以打包
      */
     boolean packageZIP() default false;
 }

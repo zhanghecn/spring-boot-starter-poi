@@ -1,10 +1,10 @@
 package com.zhanghe.poi.util.excel.sheet;
 
 
-import com.zhanghe.poi.util.excel.sheet.row.FixedRowColumnHandler;
-import com.zhanghe.poi.util.excel.sheet.row.RowHandler;
 import com.zhanghe.poi.util.excel.type.ExcelTypeWrap;
 import com.zhanghe.poi.util.excel.type.PropertyAndColumn;
+import com.zhanghe.poi.util.excel.sheet.row.FixedRowColumnHandler;
+import com.zhanghe.poi.util.excel.sheet.row.RowHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -20,8 +20,8 @@ import java.util.function.Predicate;
 /**
  * 对于不是常规的excel页处理
  * 不规范的不是一行行的，所以一个sheet代表一个对象
- * @Author: ZhangHe
- * @Date: 2020/5/26 15:07
+ * @author: ZhangHe
+ * @since: 2020/5/26 15:07
  */
 @Slf4j
 public class SheetNotStandardHandlerAdapter extends AbstractSheetInfoType implements  SheetHandler{
@@ -68,8 +68,8 @@ public class SheetNotStandardHandlerAdapter extends AbstractSheetInfoType implem
 
     /**
      * 对应行里面的列信息添加
-     * @param propertyAndColumn
-     * @param row
+     * @param propertyAndColumn 属性和excel列对应信息
+     * @param row  行下标
      */
     private void putColumn(PropertyAndColumn propertyAndColumn, Integer row) {
         List<PropertyAndColumn> orDefault = this.rowColumns.getOrDefault(row, new ArrayList<>());
@@ -141,7 +141,7 @@ public class SheetNotStandardHandlerAdapter extends AbstractSheetInfoType implem
 
     /**
      * 校验类型是否为配置的类型
-     * @param o
+     * @param o 校验的对象
      */
     protected void assertType(Object o) {
         Class<?> aClass = o.getClass();
