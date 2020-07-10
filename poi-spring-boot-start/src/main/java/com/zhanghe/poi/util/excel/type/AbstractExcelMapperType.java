@@ -18,8 +18,8 @@ import java.util.Map;
 /**
  * Excel 和 类型 对应关系
  * 抽象出拥有的字段和方法
- * @Author: ZhangHe
- * @Date: 2020/4/22 17:15
+ * @author: ZhangHe
+ * @since: 2020/4/22 17:15
  */
 @Data
 public abstract  class AbstractExcelMapperType {
@@ -72,12 +72,12 @@ public abstract  class AbstractExcelMapperType {
 
     /**
      * 给父类处理字段
-     * @param field
-     * @param headers
-     * @param indexes
-     * @param propertyType
-     * @param name
-     * @param propertyDescriptor
+     * @param field 字段
+     * @param headers 头部
+     * @param indexes 下标
+     * @param propertyType 属性和列
+     * @param name 名称
+     * @param propertyDescriptor 属性描述
      */
     protected abstract void handField(Field field, Map<String, Integer> headers, Map<Integer, String> indexes, Class<?> propertyType, String name, PropertyDescriptor propertyDescriptor);
 
@@ -95,13 +95,13 @@ public abstract  class AbstractExcelMapperType {
 
     /**
      * 处理map属性
-     * @param indexes
+     * @param indexes 头部下标
      */
     protected abstract void handlerNoDetailProAndColumns(Map<Integer, String> indexes);
 
     /**
      * 扩展头部
-     * @param headers
+     * @param headers 头部信息
      */
     protected abstract void extendHeaders(Map<Integer, String> headers);
 }

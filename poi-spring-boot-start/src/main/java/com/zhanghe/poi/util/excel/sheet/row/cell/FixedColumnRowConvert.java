@@ -15,8 +15,8 @@ import java.util.Map;
 
 /**
  * 其他资源固定行列转换 如图片等
- * @Author: ZhangHe
- * @Date: 2020/5/26 15:58
+ * @author: ZhangHe
+ * @since: 2020/5/26 15:58
  */
 public class FixedColumnRowConvert implements CellDataToPropertyConvert {
     @Override

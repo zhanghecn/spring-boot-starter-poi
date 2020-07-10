@@ -5,8 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件和对应的excel映射器的信息
  * 这个文件中用来操作excel转换工具类
- * @Author: ZhangHe
- * @Date: 2020/4/22 15:52
+ * @author: ZhangHe
+ * @since: 2020/4/22 15:52
  */
 public class FileExcelMapperInfo {
     /**

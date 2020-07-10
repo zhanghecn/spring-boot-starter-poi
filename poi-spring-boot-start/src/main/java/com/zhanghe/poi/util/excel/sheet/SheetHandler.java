@@ -1,9 +1,9 @@
 package com.zhanghe.poi.util.excel.sheet;
 
 
+import com.zhanghe.poi.util.excel.sheet.row.cell.StringCellDateToProperty;
 import com.zhanghe.poi.util.excel.sheet.row.RowHandler;
 import com.zhanghe.poi.util.excel.sheet.row.cell.CellDataToPropertyConvert;
-import com.zhanghe.poi.util.excel.sheet.row.cell.StringCellDateToProperty;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,14 +19,14 @@ import java.util.function.Predicate;
 
 /**
  * Sheet页处理
- * @Author: ZhangHe
- * @Date: 2020/4/22 16:57
+ * @author: ZhangHe
+ * @since: 2020/4/22 16:57
  */
 public interface SheetHandler {
     /**
      * 获取xssfSheet
-     * @param sheet
-     * @return
+     * @param sheet sheet
+     * @return 返回xssfSheet
      */
      static Sheet getXSSFSheet(Sheet sheet) {
         SXSSFSheet sxssfSheet ;
@@ -45,25 +45,19 @@ public interface SheetHandler {
 
     /**
      * 初始化sheet样式
-     * @param sheetInfo
+     * @param sheetInfo sheet信息
      */
     default   void initCellStyle(SheetHandlerInfo sheetInfo){
 
     }
-    /**
-     * 模板是否存在头部信息
-     * @return
-     */
+
     static boolean hasHeader(SheetHandlerInfo sheetInfo){
         if(sheetInfo.getHeaderRow()==sheetInfo.getStartRow()){
             return false;
         }
         return true;
     }
-    /**
-     * 获取头部的信息
-     * @return
-     */
+
      static Map<String,Integer> getSheetHeaders(SheetHandlerInfo sheetInfo){
          //不是标准的模板没有确定的头部
          if(sheetInfo.isNotStandard()){
@@ -103,8 +97,8 @@ public interface SheetHandler {
 
     /**
      * 转换对象集合
-     * @param condition
-     * @return
+     * @param condition 条件
+     * @return 获取对象集合
      */
     List getObjects(Predicate<Sheet> condition);
 
@@ -114,29 +108,29 @@ public interface SheetHandler {
 
     /**
      * 转换指定对象
-     * @param sheet
-     * @param i
-     * @return
+     * @param sheet sheet
+     * @param i 行下标
+     * @return 获取某行转换的对象
      */
     Object getObject(Sheet sheet, int i);
 
     /**
      * 获取行映射器
-     * @param row
-     * @return
+     * @param row 行
+     * @return 获取行处理器
      */
     RowHandler getRowHandlerAdapter(Row row);
 
     /**
      * 写入
-     * @param list
+     * @param list 写入的数据
      */
     void write(List<?> list);
 
     /**
      * 写入扩展头部
-     * @param sheet
-     * @param currentValue
+     * @param sheet sheet页
+     * @param currentValue 当前值
      */
     void writeExtendHeaders(Sheet sheet, Map<Integer, String> currentValue);
 
@@ -144,7 +138,7 @@ public interface SheetHandler {
     /**
      * 比较sheet页是否一样
      * @param sheet 比较的sheet
-     * @return
+     * @return 比较头部是否成功
      */
     boolean comparison(SheetHandlerInfo sheet);
 

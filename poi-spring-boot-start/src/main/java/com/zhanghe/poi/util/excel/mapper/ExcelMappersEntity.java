@@ -1,8 +1,9 @@
 package com.zhanghe.poi.util.excel.mapper;
 
 import com.zhanghe.poi.autoconfig.entity.ExcelEntity;
-import com.zhanghe.poi.util.ExcelMapperUtil;
 import com.zhanghe.poi.util.SpringContextHelper;
+import com.zhanghe.poi.util.ExcelMapperUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * 储存实体类配置和对应的 文件和对应的excel映射器的信息
  * 用来取对应的excel映射器来操作转换实体类和导出实体类
  */
+@Slf4j
 public class ExcelMappersEntity implements Closeable {
     private List<ExcelEntity> excelEntities;
     private List<FileExcelMapperInfo> excelMappers;
@@ -36,8 +38,8 @@ public class ExcelMappersEntity implements Closeable {
 
     /**
      * 添加文件excel映射器
-     * @param excelMapperArray
-     * @param multipartFile
+     * @param excelMapperArray  excel映射类数组
+     * @param multipartFile 添加springmvc 处理的文件
      */
     public void add(ExcelMapper[] excelMapperArray, MultipartFile multipartFile){
         if(this.excelMappers==null){
@@ -86,8 +88,8 @@ public class ExcelMappersEntity implements Closeable {
               }
               excelMappersEntity.add(excelMapper,multipartFile);
           }
-      } catch (Exception e) {
-          e.printStackTrace();
+      } catch (IOException e) {
+         log.error(e.getMessage());
          throw new RuntimeException(e.getMessage());
       }
       return excelMappersEntity;

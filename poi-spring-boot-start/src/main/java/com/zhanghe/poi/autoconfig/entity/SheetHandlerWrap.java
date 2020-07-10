@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 /**
  * sheet封装迭代器
  * 可以迭代sheet 中每一行转换的对象
- * @param <T>
+ * @param <T> 迭代类型
  */
 public class SheetHandlerWrap<T> implements Iterable<T>{
 
@@ -94,7 +94,7 @@ public class SheetHandlerWrap<T> implements Iterable<T>{
 
     /**
      * 创造行的迭代器
-     * @return
+     *
      */
     @Override
     public Iterator<T> iterator() {
@@ -104,7 +104,7 @@ public class SheetHandlerWrap<T> implements Iterable<T>{
 
     /**
      * 循环迭代
-     * @param action
+     * @param action 接收访问
      */
     @Override
     public void forEach(Consumer<? super T> action) {

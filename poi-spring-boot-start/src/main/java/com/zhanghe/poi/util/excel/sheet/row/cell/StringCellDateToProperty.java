@@ -10,17 +10,13 @@ import org.springframework.util.StringUtils;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringCellDateToProperty implements CellDataToPropertyConvert {
     @Override
     public Object convert(Cell cell, Class<?> c, PropertyAndColumn propertyAndColumn) {
         String stringValue = getStringValue(cell,propertyAndColumn);
-        if(stringValue!=null){
+        if(StringUtils.hasText(stringValue) && cell.getCellType() == CellType.NUMERIC){
             //匹配是否末尾有连串的0
-            Matcher mer = Pattern.compile("^[+-]?[0-9]+(.([0-9]|E|e)+){0,1}$").matcher(stringValue);
-            if(mer.find()){
                 try {
                     double d = NumberUtils.parseNumber(stringValue,Double.class);
                     //是的转换为大的数据类型
@@ -29,7 +25,6 @@ public class StringCellDateToProperty implements CellDataToPropertyConvert {
                 } catch (Exception e) {
                     //不处理异常
                 }
-            }
         }
         return stringValue;
     }

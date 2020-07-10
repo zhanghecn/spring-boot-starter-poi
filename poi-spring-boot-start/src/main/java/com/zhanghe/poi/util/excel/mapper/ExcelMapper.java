@@ -63,7 +63,7 @@ public class ExcelMapper implements ExcelOperationMapper,Closeable{
 
     /**
      * 通过流,创建
-     * @param inputStream
+     * @param inputStream 输入流
      */
     public ExcelMapper(InputStream inputStream) {
         try {
@@ -99,7 +99,7 @@ public class ExcelMapper implements ExcelOperationMapper,Closeable{
 
     /**
      * 写入
-     * @param outputStream
+     * @param outputStream 输出流
      */
     protected void writer(OutputStream outputStream){
         try {
@@ -114,7 +114,7 @@ public class ExcelMapper implements ExcelOperationMapper,Closeable{
 
     /**
      * 写入
-     * @param zipOutStream
+     * @param zipOutStream zip输出流
      */
     protected void writerZip(OutputStream zipOutStream){
         try {
