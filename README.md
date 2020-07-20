@@ -14,12 +14,13 @@ Spring Boot 集成 POI
 
 
 ```
- <!-- https://mvnrepository.com/artifact/com.github.zhanghecn/poi-spring-boot-start -->
+<!-- https://mvnrepository.com/artifact/com.github.zhanghecn/poi-spring-boot-starter -->
 <dependency>
     <groupId>com.github.zhanghecn</groupId>
-    <artifactId>poi-spring-boot-start</artifactId>
-    <version>2.2.7-RELEASE</version>
+    <artifactId>poi-spring-boot-starter</artifactId>
+    <version>2.2.8</version>
 </dependency>
+
 ```
 
 
