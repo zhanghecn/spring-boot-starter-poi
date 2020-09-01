@@ -44,7 +44,6 @@ public class ExcelController implements ApplicationContextAware {
     URIPathMappingHandlerAdapter uriPathMappingHandlerAdapter;
 
     public ExcelController() {
-        System.out.println("为什么被初始化？");
     }
 
     @PostConstruct
