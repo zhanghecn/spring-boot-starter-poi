@@ -3,8 +3,8 @@ package com.zhanghe.poi.autoconfig.annotation;
 
 import com.zhanghe.poi.autoconfig.entity.ExcelEntity;
 import com.zhanghe.poi.autoconfig.entity.ExcelGroupSheets;
-import com.zhanghe.poi.util.ExcelMapperUtil;
 import com.zhanghe.poi.util.excel.mapper.ExcelMapper;
+import com.zhanghe.poi.util.ExcelMapperUtil;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.core.MethodParameter;
@@ -55,13 +55,12 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
      */
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
-        //只处理这个返回
         mavContainer.setRequestHandled(true);
         ExcelMapperUtil excelMapperUtil = excelMapperUtilFactoryBean.getObject();
         ExcelExport mergedAnnotation = AnnotatedElementUtils.findMergedAnnotation(returnType.getMethod(), ExcelExport.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-
         setContentType(mergedAnnotation.exportFileName(), response);
+
         ServletOutputStream outputStream = response.getOutputStream();
 
         Class<?> parameterType = returnType.getParameterType();
