@@ -1,7 +1,7 @@
 # spring-boot-start-poi
 
 #### 介绍
-poi-spring-boot-zh [https://www.yuque.com/books/share/b1663ee4-c64e-4b7f-a6b8-e7f6920b9786](https://www.yuque.com/books/share/b1663ee4-c64e-4b7f-a6b8-e7f6920b9786)
+poi-spring-boot-zh [https://www.yuque.com/books/share/b1663ee4-c64e-4b7f-a6b8-e7f6920b9786?#《spring boot poi》](https://www.yuque.com/books/share/b1663ee4-c64e-4b7f-a6b8-e7f6920b9786?#%20《spring%20boot%20poi》)
  **里面示例由于时间问题，没有写完，很多示例需要慢慢补充，当然您也可以直接看源码，来了解会有什么功能** 
 #### VUE项目演示:https://gitee.com/zh2016976438/Spring-boot-poi-vue
 #### 软件架构
@@ -14,12 +14,13 @@ Spring Boot 集成 POI
 
 
 ```
- <!-- https://mvnrepository.com/artifact/com.github.zhanghecn/poi-spring-boot-start -->
+<!-- https://mvnrepository.com/artifact/com.github.zhanghecn/poi-spring-boot-starter -->
 <dependency>
     <groupId>com.github.zhanghecn</groupId>
-    <artifactId>poi-spring-boot-start</artifactId>
-    <version>2.2.7-RELEASE</version>
+    <artifactId>poi-spring-boot-starter</artifactId>
+    <version>2.2.8</version>
 </dependency>
+
 ```
 
 

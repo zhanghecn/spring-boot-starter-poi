@@ -3,13 +3,15 @@ package com.zhanghe.poi.autoconfig.annotation;
 
 import com.zhanghe.poi.autoconfig.entity.ExcelEntity;
 import com.zhanghe.poi.autoconfig.entity.ExcelGroupSheets;
-import com.zhanghe.poi.util.excel.mapper.ExcelMapper;
 import com.zhanghe.poi.util.ExcelMapperUtil;
+import com.zhanghe.poi.util.excel.mapper.ExcelMapper;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
@@ -53,12 +55,16 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
      */
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
+        //只处理这个返回
         mavContainer.setRequestHandled(true);
         ExcelMapperUtil excelMapperUtil = excelMapperUtilFactoryBean.getObject();
         ExcelExport mergedAnnotation = AnnotatedElementUtils.findMergedAnnotation(returnType.getMethod(), ExcelExport.class);
-        Class<?> parameterType = returnType.getParameterType();
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
+
+        setContentType(mergedAnnotation.exportFileName(), response);
         ServletOutputStream outputStream = response.getOutputStream();
+
+        Class<?> parameterType = returnType.getParameterType();
         //打包成zip
         if(mergedAnnotation.packageZIP()&& ClassUtils.isAssignable(List.class,parameterType)){
 
@@ -93,7 +99,6 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
                 if(!ObjectUtils.isEmpty(excelEntities)){
                     ExcelEntity excelEntity = excelEntities.get(0);
                     ExcelMapper excelMapper = ExcelMapper.getExcelMapper(excelEntity);
-                    setContentType(mergedAnnotation.exportFileName(), response);
                     excelMapper.writer(excelEntity,list,outputStream);
                 }
             }else{
@@ -126,9 +131,9 @@ public class ExcelExportMethodReturnHandler implements HandlerMethodReturnValueH
     }
 
     public static void setContentType(String exportFileName, HttpServletResponse response) throws UnsupportedEncodingException {
-        response.setContentType("application/octet-stream");
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         exportFileName = response.encodeURL(new String(exportFileName.getBytes(),"iso8859-1"));			//保存的文件名,必须和页面编码一致,否则乱码
-        response.addHeader("content-disposition","attachment;filename=" + exportFileName);
+        response.addHeader(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=" + exportFileName);
     }
 
 
